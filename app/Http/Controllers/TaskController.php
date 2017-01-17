@@ -59,7 +59,8 @@ class TaskController extends Controller
 
         $request->user()->tasks()->create([
             'name' => $request->name,
-            'description' => $request->description
+            'description' => $request->description,
+	    'status' => 'todo'
         ]);
 
         return redirect('/tasks');
@@ -92,6 +93,13 @@ public function edit(Request $request , Task $task){
         $task -> description = $request['description'];
         $task->update();
 
+        return redirect('/tasks');
+
+    }
+
+public function changeStatus (Request $request , Task $task){
+        $task -> status = $request['task-status'];
+        $task -> update();
         return redirect('/tasks');
 
     }
