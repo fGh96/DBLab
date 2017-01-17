@@ -25,6 +25,15 @@
                             </div>
                         </div>
 
+ 			<!-- Task Description -->
+                            <div class="form-group">
+                                <label for="task-name" class="col-sm-3 control-label">Task Description</label>
+
+                                <div class="col-sm-6">
+                                    <input type="text" name="description" id="task-Description" class="form-control" value="{{ old('task-Description') }}">
+                                </div>
+                            </div>
+
                         <!-- Add Task Button -->
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
@@ -48,14 +57,16 @@
                         <table class="table table-striped task-table">
                             <thead>
                                 <th>Task</th>
+				<th>Description</th>
                                 <th>&nbsp;</th>
                             </thead>
                             <tbody>
                                 @foreach ($tasks as $task)
                                     <tr>
                                         <td class="table-text"><div>{{ $task->name }}</div></td>
+					<td class="table-text"><div>{{ $task->description }}</div></td>
 
-                                        <!-- Task Delete Button -->
+                                         <!-- Task Delete Button -->
                                         <td>
                                             <form action="{{url('task/' . $task->id)}}" method="POST">
                                                 {{ csrf_field() }}
@@ -65,6 +76,16 @@
                                                     <i class="fa fa-btn fa-trash"></i>Delete
                                                 </button>
                                             </form>
+
+                                            <form action="{{url('tasks/edit/' . $task->id)}}" method="POST">
+                                                {{ csrf_field() }}
+                                                {{ method_field('POST') }}
+
+                                                <button type="submit" id="edit-description-{{ $task->id }}" class="btn btn-warning">
+                                                    <i class="fa fa-btn fa-edit"></i>Edit
+                                                </button>
+                                            </form>
+
                                         </td>
                                     </tr>
                                 @endforeach

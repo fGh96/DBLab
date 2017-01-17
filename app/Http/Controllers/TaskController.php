@@ -59,6 +59,7 @@ class TaskController extends Controller
 
         $request->user()->tasks()->create([
             'name' => $request->name,
+            'description' => $request->description
         ]);
 
         return redirect('/tasks');
@@ -79,4 +80,20 @@ class TaskController extends Controller
 
         return redirect('/tasks');
     }
+
+public function edit(Request $request , Task $task){
+        return view('tasks.edit', [
+            'task' => $task,
+        ]);
+    }
+
+    public function edit_post(Request $request , Task $task){
+        $task -> name = $request['name'];
+        $task -> description = $request['description'];
+        $task->update();
+
+        return redirect('/tasks');
+
+    }
+
 }
