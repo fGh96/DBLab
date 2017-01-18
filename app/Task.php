@@ -12,7 +12,7 @@ class Task extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'description' , 'status'];
+    protected $fillable = ['name', 'description' , 'status', 'board'];
 
 
     
@@ -31,5 +31,11 @@ class Task extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+
+    public function board()
+    {
+        return $this->belongsTo(Board::class);
     }
 }
