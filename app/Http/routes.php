@@ -34,6 +34,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/task/changeStatus/{task}', 'TaskController@changeStatus');
     Route::any('/tasks/edit/{task}', 'TaskController@edit');
     Route::post('/task/post/{task}', 'TaskController@edit_post');
+    Route::get('/boards', 'TaskController@addBoard');
+    Route::post('/task/board/add/post', 'TaskController@addBoardPost');
+    Route::post('/task/add/board/{task}', 'TaskController@addBoardToTask');
+    Route::post('/board/{board}', 'TaskController@BoardIndex');
     Route::auth();
 
 
